@@ -1,0 +1,32 @@
+name: glpi
+
+services:
+  glpi:
+    image: "glpi/glpi:latest"
+    restart: "unless-stopped"
+    container_name: glpi
+    hostname: glpi
+    volumes:
+      - glpi_data:/var/glpi
+    env_file: .env
+    depends_on:
+      - mariadb
+    ports:
+      - "8080:80"
+
+  mariadb:
+    image: "mariadb:lts-ubi10"
+    restart: "unless-stopped"
+    container_name: mariadb
+    hostname: mariadb
+    volumes:
+      - mariadb_data:/var/lib/mysql
+    environment:
+      MARIADB_ROOT_PASSWORD: ${GLPI_DB_ROOT_PASSWORD}
+      MARIADB_DATABASE: ${GLPI_DB_NAME}
+      MARIADB_USER: ${GLPI_DB_USER}
+      MARIADB_PASSWORD: ${GLPI_DB_PASSWORD}
+
+volumes:
+  glpi_data:
+  mariadb_data:
