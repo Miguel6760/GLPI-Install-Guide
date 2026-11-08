@@ -159,7 +159,7 @@ volumes:
   mariadb_data:
 ```
 
-Fisicamente en el sistema se encuentran en **/var/lib/docker/volumes/**.
+Físicamente los volúmenes en el sistema se encuentran en **/var/lib/docker/volumes/**.
 
 ## Inicio de los contenedores
 
