@@ -2,10 +2,24 @@
 Guía para la instalacion de un servidor GLPI y un agente simple en Ubuntu Server.
 
 ## ÍNDICE
+- [Primeros pasos](#primeros-pasos)
 - [Instalación y configuración docker](#instalación-y-configuracion-docker)
 - [Descarga de imagenes](#descarga-de-imagenes)
 - [Configuración de los contenedores](#configuración-de-los-contenedores)
 - [Inicio de los contenedores](#inicio-de-los-contenedores)
+- [Instalación de un agente glpi en otro servidor](#instalación-de-un-agente-glpi-en-otro-servidor)
+
+## Primeros pasos
+
+Para que no haya fallos en la conexión de la máquina, recomiendo permitir los siguiente puertos en el firewall:
+
+```bash
+sudo ufw allow 3306/tcp comment "MariaDB"
+sudo ufw allow 8080/tcp comment "GLPI Server"
+sudo ufw allow 2222/tcp comment "SSH ( OPCIONAL )"
+
+sudo ufw reload
+```
 
 ## Instalación y configuracion docker
 
@@ -163,6 +177,23 @@ NAME      IMAGE               COMMAND                  SERVICE   CREATED        
 glpi      glpi/glpi:latest    "/opt/glpi/entrypoin…"   glpi      45 hours ago   Up 13 seconds   0.0.0.0:8080->80/tcp, [::]:8080->80/tcp
 mariadb   mariadb:lts-ubi10   "docker-entrypoint.s…"   mariadb   45 hours ago   Up 13 seconds   3306/tcp
 ```
+
+Con esto debería estar funcionando correctamente GLPI. Desde otra maquina en la misma red, entra en un navegador con la siguiente url:
+
+```nano
+http://IPDETUSERVIDOR:8080/
+# El puerto puedes cambiarlo en el archivo docker-compose.yml.
+```
+
+Debería aparecer la web de glpi. El usuario y contraseña por defecto son:
+
+```nano
+usuario: glpi
+contraseña: glpi
+```
+
+
+## Instalación de un agente glpi en otro servidor
 
 
 
