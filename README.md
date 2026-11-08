@@ -146,8 +146,8 @@ services:
     restart: "unless-stopped"
     container_name: mariadb
     hostname: mariadb
-    volumes:                            # Directorio donde se guardará la BBDD
-      - mariadb_data:/var/lib/mysql     
+    volumes:                            
+      - mariadb_data:/var/lib/mysql     # Directorio donde se guardará la BBDD
     environment:                        # Variables de la BBDD usando las declaradas en el archivo .env
       MARIADB_ROOT_PASSWORD: ${GLPI_DB_ROOT_PASSWORD}
       MARIADB_DATABASE: ${GLPI_DB_NAME}
@@ -155,7 +155,7 @@ services:
       MARIADB_PASSWORD: ${GLPI_DB_PASSWORD}
 
 volumes:
-  glpi_data:
+  data:
   mariadb_data:
 ```
 
