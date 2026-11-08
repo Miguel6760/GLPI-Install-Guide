@@ -225,7 +225,7 @@ Después, iremos a ***'Setup -> OAuth clients'*** y creamos tantas claves como c
 
 Es recomendable instalarlo mediante perl. Para ello, descargamos el instalador con el siguiente enlace: 
 
-<https://github.com/glpi-project/glpi-agent/releases/download/1.21/glpi-agent-1.21-linux-installer.pl>
+<https://github.com/glpi-project/glpi-agent/releases>
 
 Para instalarlo introducimos el siguiente comando:
 
