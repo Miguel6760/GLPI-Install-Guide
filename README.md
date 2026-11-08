@@ -195,5 +195,54 @@ contraseña: glpi
 
 ## Instalación de un agente glpi en otro servidor
 
+### Instalación
 
+Es recomendable instalarlo mediante perl. Para ello, descargamos el instalador con el siguiente enlace: 
+
+<https://github.com/glpi-project/glpi-agent/releases/download/1.21/glpi-agent-1.21-linux-installer.pl>
+
+Para instalarlo introducimos el siguiente comando:
+
+```bash
+# Si no tienes instalado pearl
+sudo apt install pearl
+
+perl glpi-agent-1.21-linux-installer.pl
+```
+
+### Configuración
+
+El archivo de configuración se encuentra en la siguiente ruta:
+
+```nano
+/etc/glpi-agent/conf.d/00-install.cfg
+```
+
+Un contenido simple sería este:
+
+```nano
+server = http://IPSERVIDOR:8080
+tag = cliente_A                    # Etiqueta para diferenciar entre distintos clientes ( OPCIONAL )
+task =                             # Tareas a realizar
+
+# Autenticación por clave ( Lo veremos más adelante )
+oauth-client-id = 
+oauth-client-secret = 
+```
+
+Las tareas puden ser de distintos tipos:
+
+| Valor | Descripción / Función |
+| :--- | :--- |
+| `all` | *(Por defecto)* Ejecuta todas las tareas disponibles asignadas por el servidor GLPI |
+| `inventory` | Realiza el inventario local de hardware, software y sistema operativo |
+| `deploy` | Permite el despliegue de paquetes de software y ejecución de scripts remotos |
+| `network` | Escaneo de red (SNMP / NetDiscovery / NetInventory) para impresoras, switches, etc. |
+| `collect` | Extrae archivos o claves de registro específicos del equipo |
+| `esx` | Realiza el inventario de hipervisores VMware ESX/ESXi mediante API |
+| `wakeonlan` | Envía paquetes Magic Packet (WOL) para encender otros equipos de la red |
+| `none` | Desactiva las tareas automáticas (útil para ejecuciones manuales o pruebas) |
+
+
+Múltiples tareas se separan por comas.
 
