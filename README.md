@@ -8,6 +8,7 @@ Guía para la instalacion de un servidor GLPI y un agente simple en Ubuntu Serve
 - [Configuración de los contenedores](#configuración-de-los-contenedores)
 - [Inicio de los contenedores](#inicio-de-los-contenedores)
 - [Instalación de un agente glpi en otro servidor](#instalación-de-un-agente-glpi-en-otro-servidor)
+- [Pasos finales para el servidor](#pasos-finales-para-el-servidor)
 
 ## Primeros pasos
 
@@ -192,6 +193,23 @@ usuario: glpi
 contraseña: glpi
 ```
 
+## Pasos finales para el servidor
+
+Para que los clientes puedan eviar su inventario al servidor, vamos a ***'Administration -> Inventory'*** y  habilitaremos la opción 'inventory enabled' en el servidor. Además, para aumentar la seguridad, habilitaremos la autenticación por clave:
+
+![Pasos finales](./img/glpi_server1.PNG)
+
+Después, iremos a ***'Setup -> OAuth clients'*** y creamos tantas claves como clientes tengamos. El procedimiento es el siguiente:
+
+* Añadimos un nuevo cliente.
+
+![Pasos finales](./img/glpi1.PNG)
+
+* Elegimos un nombre . En el apartado **'scopes'** seleccionamos inventory. En el apartado **'Grants'** seleccionamos client credentials. Debería quedar así:
+
+![Pasos finales](./img/glpi2.PNG)
+
+* Le damos a **'+ Add'**. Si volvemos a OAuth clients y entramos en que acabamos de crear, veremos el **ID** y el **Secret** del cliente. Los utilizaremos más tarde para la creación del agente.
 
 ## Instalación de un agente glpi en otro servidor
 
@@ -225,7 +243,7 @@ server = http://IPSERVIDOR:8080
 tag = cliente_A                    # Etiqueta para diferenciar entre distintos clientes ( OPCIONAL )
 task =                             # Tareas a realizar
 
-# Autenticación por clave ( Lo veremos más adelante )
+# Autenticación por clave
 oauth-client-id = 
 oauth-client-secret = 
 ```
