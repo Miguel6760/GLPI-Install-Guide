@@ -12,12 +12,18 @@ Guía para la instalacion de un servidor GLPI y un agente simple en Ubuntu Serve
 
 ## Primeros pasos
 
-Para que no haya fallos en la conexión de la máquina, recomiendo permitir los siguiente puertos en el firewall:
+Para que no haya fallos en la conexión de la máquina, recomiendo permitir los siguiente puertos en el firewall **tanto en el servidor como en el cliente**:
 
 ```bash
-sudo ufw allow 3306/tcp comment "MariaDB"
+# En el servidor
+sudo ufw allow 3306/tcp comment "MariaDB"         
 sudo ufw allow 8080/tcp comment "GLPI Server"
 sudo ufw allow 2222/tcp comment "SSH ( OPCIONAL )"
+
+#En el cliente
+sudo ufw allow 8080/tcp comment "GLPI Server"
+sudo ufw allow 2222/tcp comment "SSH ( OPCIONAL )"ç
+sudo ufw allow 62354/tcp comment "GLPI Agent ( OPCIONAL )"   # Solo si vas a forzar inventario desde la web del servidor.
 
 sudo ufw reload
 ```
@@ -211,6 +217,8 @@ Después, iremos a ***'Setup -> OAuth clients'*** y creamos tantas claves como c
 
 * Le damos a **'+ Add'**. Si volvemos a OAuth clients y entramos en que acabamos de crear, veremos el **ID** y el **Secret** del cliente. Los utilizaremos más tarde para la creación del agente.
 
+![Pasos finales](./img/glpi3.PNG)
+
 ## Instalación de un agente glpi en otro servidor
 
 ### Instalación
@@ -262,5 +270,16 @@ Las tareas puden ser de distintos tipos:
 | `none` | Desactiva las tareas automáticas (útil para ejecuciones manuales o pruebas) |
 
 
-Múltiples tareas se separan por comas.
+Múltiples tareas se separan por comas. Si no se pone la variable **task** esta toma el valor por defecto.
 
+Por defecto las tareas se ejecutan cada 24h, pero puedes cambiarlo desde la web del servidor GLPI.
+
+**Con esto ya estaría operativo tanto el servidor como el cliente.**
+
+Por último, si quieres forzar un inventario desde el cliente para probarlo, el comando es este:
+
+```bash
+glpi-agent
+
+# o glpi-agent --force para forzarlo
+```
