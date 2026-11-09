@@ -7,7 +7,7 @@ services:
     container_name: glpi
     hostname: glpi
     volumes:
-      - glpi_data:/var/glpi
+      - data:/var/glpi
     env_file: .env
     depends_on:
       - mariadb
@@ -28,5 +28,5 @@ services:
       MARIADB_PASSWORD: ${GLPI_DB_PASSWORD}
 
 volumes:
-  glpi_data:
+  data:
   mariadb_data:
