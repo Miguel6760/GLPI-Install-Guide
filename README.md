@@ -2,6 +2,10 @@
 Guía para la instalacion de un servidor GLPI y un agente simple en Ubuntu Server.
 
 ## ÍNDICE
+- [GLPI HTTP Web](#glpi-http-web)
+- [GLPI HTTPS Web](#glpi-https-web)
+
+  
 - [Primeros pasos](#primeros-pasos)
 - [Instalación y configuración docker](#instalación-y-configuracion-docker)
 - [Descarga de imagenes](#descarga-de-imagenes)
@@ -9,6 +13,9 @@ Guía para la instalacion de un servidor GLPI y un agente simple en Ubuntu Serve
 - [Inicio de los contenedores](#inicio-de-los-contenedores)
 - [Instalación de un agente glpi en otro servidor](#instalación-de-un-agente-glpi-en-otro-servidor)
 - [Pasos finales para el servidor](#pasos-finales-para-el-servidor)
+
+
+### HTTP
 
 ## Primeros pasos
 
@@ -218,6 +225,82 @@ Después, iremos a ***'Setup -> OAuth clients'*** y creamos tantas claves como c
 * Le damos a **'+ Add'**. Si volvemos a OAuth clients y entramos en que acabamos de crear, veremos el **ID** y el **Secret** del cliente. Los utilizaremos más tarde para la creación del agente.
 
 ![Pasos finales](./img/glpi3.PNG)
+
+
+
+### HTTPS
+
+GLPI por defecto no soporta HTTPS, pero podemos implementarlo utilizando nginx como proxy web:
+
+Primero conseguimos los certificados deseados cert.pem y key.pem. Si el certificado es de una entidad, te darán un archivo empaquetado con el par de claves (.p12 o .pfx ). Para extraerlas haz lo siguiente:
+
+```bash
+# Extraer la clave privada (key.pem)
+openssl pkcs12 -in certificado.p12 -nocerts -out key.pem -nodes
+
+# Extraer el certificado público (cert.pem)
+openssl pkcs12 -in certificado.p12 -clcerts -nokeys -out cert.pem
+```
+
+Si por el contrario lo quieres autofirmado, el comando para generarlas es el siguiente:
+
+```bash
+
+```
+
+
+Una vez con el par de claves, el contenido de docker-compose.yml cambiaría a esto:
+
+```yaml
+name: glpi
+
+services:
+  glpi:
+    image: "glpi/glpi:latest"
+    restart: "unless-stopped"
+    container_name: glpi
+    hostname: glpi
+    volumes:
+      - data:/var/glpi
+    env_file: .env
+    depends_on:
+      - mariadb
+    ports:
+      - "8080:80"
+
+  web-proxy:
+    image: nginx:alpine
+    restart: "unless-stopped"
+    container_name: web-proxy
+    ports:
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./ssl/cert.pem:/etc/nginx/certs/cert.pem:ro
+      - ./ssl/key.pem:/etc/nginx/certs/key.pem:ro
+    depends_on:
+      - glpi
+
+  mariadb:
+    image: "mariadb:lts-ubi10"
+    restart: "unless-stopped"
+    container_name: mariadb
+    hostname: mariadb
+    volumes:
+      - mariadb_data:/var/lib/mysql
+    environment:
+      MARIADB_ROOT_PASSWORD: ${GLPI_DB_ROOT_PASSWORD}
+      MARIADB_DATABASE: ${GLPI_DB_NAME}
+      MARIADB_USER: ${GLPI_DB_USER}
+      MARIADB_PASSWORD: ${GLPI_DB_PASSWORD}
+
+volumes:
+  data:
+  mariadb_data:
+
+```
+
+
 
 ## Instalación de un agente glpi en otro servidor
 
