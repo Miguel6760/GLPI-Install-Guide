@@ -3,7 +3,7 @@ Guía para la instalacion de un servidor GLPI y un agente simple en Ubuntu Serve
 
 ## ÍNDICE
 - [GLPI HTTP Web](#http)
-- [GLPI HTTPS Web](#https)
+- [GLPI HTTPS Web (OPCIONAL)](#https)
 
   
 - [Primeros pasos](#primeros-pasos)
@@ -186,7 +186,7 @@ usuario: glpi
 contraseña: glpi
 ```
 
-### HTTPS
+### HTTPS (OPCIONAL)
 
 GLPI por defecto no soporta HTTPS, pero podemos implementarlo utilizando nginx como proxy web:
 
