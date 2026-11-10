@@ -3,7 +3,7 @@ Guía para la instalacion de un servidor GLPI y un agente simple en Ubuntu Serve
 
 ## ÍNDICE
 - [GLPI HTTP Web](#http)
-- [GLPI HTTPS Web (OPCIONAL)](#https-(opcional))
+- [GLPI HTTPS Web (OPCIONAL)](#https)
 
   
 - [Primeros pasos](#primeros-pasos)
@@ -186,9 +186,9 @@ usuario: glpi
 contraseña: glpi
 ```
 
-### HTTPS (OPCIONAL)
+### HTTPS
 
-GLPI por defecto no soporta HTTPS, pero podemos implementarlo utilizando nginx como proxy web:
+GLPI por defecto no soporta HTTPS, pero podemos implementarlo utilizando nginx como proxy web ( ESTO ES OPCIONAL, PUEDES SALTARTELO ):
 
 Primero conseguimos los certificados deseados cert.pem y key.pem. Si el certificado es de una entidad, te darán un archivo empaquetado con el par de claves (.p12 o .pfx ). Para extraerlas haz lo siguiente:
 
