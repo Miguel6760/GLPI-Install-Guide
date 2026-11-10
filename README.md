@@ -223,10 +223,6 @@ server {
     ssl_certificate /etc/nginx/certs/cert.pem;
     ssl_certificate_key /etc/nginx/certs/key.pem;
 
-    location /plugins/hidecomputertabs/ {
-        alias /var/www/glpi/plugins/hidecomputertabs/;
-    }
-
     location / {
         proxy_pass http://glpi:80;
         proxy_set_header Host $host;
