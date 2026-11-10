@@ -3,7 +3,7 @@ Guía para la instalacion de un servidor GLPI y un agente simple en Ubuntu Serve
 
 ## ÍNDICE
 - [GLPI HTTP Web](#http)
-- [GLPI HTTPS Web (OPCIONAL)](#https)
+- [GLPI HTTPS Web (OPCIONAL)](#https-(opcional))
 
   
 - [Primeros pasos](#primeros-pasos)
