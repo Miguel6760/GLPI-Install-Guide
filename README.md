@@ -190,7 +190,13 @@ contraseña: glpi
 
 GLPI por defecto no soporta HTTPS, pero podemos implementarlo utilizando nginx como proxy web ( ESTO ES OPCIONAL, PUEDES SALTARTELO ):
 
-Primero conseguimos los certificados deseados cert.pem y key.pem. Si el certificado es de una entidad, te darán un archivo empaquetado con el par de claves (.p12 o .pfx ). Para extraerlas haz lo siguiente:
+Creamos una carpeta para los certificados:
+
+```bash
+mkdir ssl
+```
+
+Despues conseguimos los certificados deseados cert.pem y key.pem. Si el certificado es de una entidad, te darán un archivo empaquetado con el par de claves (.p12 o .pfx ). Para extraerlas haz lo siguiente:
 
 ```bash
 # Extraer la clave privada (key.pem)
@@ -286,6 +292,22 @@ volumes:
   mariadb_data:
 
 ```
+
+La estructura debe qeudar asi:
+
+```bash
+~/GLPI/
+├── docker-compose.yml       # Definición de servicios (mariadb, glpi, web-proxy)
+├── .env                     # Variables de entorno
+├── nginx.conf               # Configuración del proxy HTTPS
+└── ssl/                     # Carpeta dedicada a certificados
+    ├── cert.pem             # Certificado público
+    └── key.pem              # Clave privada
+```
+
+Faltaría configurar la url del servidor dentro la interfaz web. Iniciamos los contenedores y entramos en la web de GLPI.
+
+Entramos en **Setup --> General** y cambiamos al url por su equivalente en https.
 
 ## Pasos finales para el servidor
 
