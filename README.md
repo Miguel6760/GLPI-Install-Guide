@@ -8,14 +8,11 @@ Guía para la instalacion de un servidor GLPI y un agente simple en Ubuntu Serve
   
 - [Primeros pasos](#primeros-pasos)
 - [Instalación y configuración docker](#instalación-y-configuracion-docker)
-- [Descarga de imagenes](#descarga-de-imagenes)
 - [Configuración de los contenedores](#configuración-de-los-contenedores)
 - [Inicio de los contenedores](#inicio-de-los-contenedores)
 - [Instalación de un agente glpi en otro servidor](#instalación-de-un-agente-glpi-en-otro-servidor)
 - [Pasos finales para el servidor](#pasos-finales-para-el-servidor)
 
-
-### HTTP
 
 ## Primeros pasos
 
@@ -75,28 +72,11 @@ sudo usermod -aG docker TUUSUARIO
 ```
 Hay que reiniciar la maquina para guardar los cambios.
 
-## Descarga de imagenes
-
-Ahora procedemos a la descarga de las imágenes de GLPI y MariaDB:
-
-```bash
-docker pull glpi/glpi
-docker pull mariadb:lts-ubi10
-```
-
-Para comprobar que se han descargado, ejecutamos el siguiente comando:
-
-```bash
-asrc@ServerGLPI:~$ docker images
-                                                                                                                           
-IMAGE               ID             DISK USAGE   CONTENT SIZE   EXTRA
-glpi/glpi:latest    f1a08a72afa5       1.69GB          376MB    U
-mariadb:lts-ubi10   3b6b6ef7565b        723MB          171MB    U
-```
+### HTTP
 
 ## Configuración de los contenedores
 
-Ahora que tenemos las imágenes, vamos a configurarlas para que se comuniquen entre si.
+Vamos a configurar los contenedores para que se comuniquen entre si.
 
 Creamos un directorio de trabajo para el contenedor ( en mi caso GLPI ):
 
