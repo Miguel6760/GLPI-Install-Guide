@@ -362,6 +362,9 @@ server = http://IPSERVIDOR:8080
 tag = cliente_A                    # Etiqueta para diferenciar entre distintos clientes ( OPCIONAL )
 task =                             # Tareas a realizar
 
+# Puedes evitar enviar ciertos datos del sistema con esta variable
+no-category = accesslog,antivirus,battery,database,environment,firewall,input,licenseinfo,local_group,local_user,monitor,printer,process,provider,psu,registry,rudder,sound,usb,user,slot,controller
+
 # Autenticación por clave
 oauth-client-id = 
 oauth-client-secret = 
