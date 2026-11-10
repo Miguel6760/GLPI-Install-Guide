@@ -10,8 +10,9 @@ Guía para la instalacion de un servidor GLPI y un agente simple en Ubuntu Serve
 - [Instalación y configuración docker](#instalación-y-configuracion-docker)
 - [Configuración de los contenedores](#configuración-de-los-contenedores)
 - [Inicio de los contenedores](#inicio-de-los-contenedores)
-- [Instalación de un agente glpi en otro servidor](#instalación-de-un-agente-glpi-en-otro-servidor)
 - [Pasos finales para el servidor](#pasos-finales-para-el-servidor)
+- [Instalación de un agente glpi en otro servidor](#instalación-de-un-agente-glpi-en-otro-servidor)
+
 
 
 ## Primeros pasos
