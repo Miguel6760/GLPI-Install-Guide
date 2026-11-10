@@ -2,8 +2,8 @@
 Guía para la instalacion de un servidor GLPI y un agente simple en Ubuntu Server.
 
 ## ÍNDICE
-- [GLPI HTTP Web](#glpi-http-web)
-- [GLPI HTTPS Web](#glpi-https-web)
+- [GLPI HTTP Web](#http)
+- [GLPI HTTPS Web](#https)
 
   
 - [Primeros pasos](#primeros-pasos)
@@ -245,11 +245,40 @@ openssl pkcs12 -in certificado.p12 -clcerts -nokeys -out cert.pem
 Si por el contrario lo quieres autofirmado, el comando para generarlas es el siguiente:
 
 ```bash
-
+openssl req -x509 -newkey rsa:2048 -keyout etc/key.pem -out etc/cert.pem -days 3650 -sha256 -nodes -subj "/CN=127.0.0.1"
 ```
 
+Después, creamos un archivo de configuración para el proxy llamado nginx.conf con este contenido:
 
-Una vez con el par de claves, el contenido de docker-compose.yml cambiaría a esto:
+```nano
+server {
+    listen 443 ssl;
+    server_name localhost;
+
+    ssl_certificate /etc/nginx/certs/cert.pem;
+    ssl_certificate_key /etc/nginx/certs/key.pem;
+
+    location /plugins/hidecomputertabs/ {
+        alias /var/www/glpi/plugins/hidecomputertabs/;
+    }
+
+    location / {
+        proxy_pass http://glpi:80;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto https;
+    }
+}
+
+```
+Deberia quedar estructurado asi:
+
+```bash
+
+``
+
+Una vez con el par de claves y el archivo de configuración, el contenido de docker-compose.yml cambiaría a esto:
 
 ```yaml
 name: glpi
