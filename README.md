@@ -324,7 +324,7 @@ Después, iremos a ***'Setup -> OAuth clients'*** y creamos tantas claves como c
 
 ![Pasos finales](./img/glpi2.PNG)
 
-* Le damos a **'+ Add'**. Si volvemos a OAuth clients y entramos en que acabamos de crear, veremos el **ID** y el **Secret** del cliente. Los utilizaremos más tarde para la creación del agente.
+* Le damos a **'+ Add'**. Si volvemos a OAuth clients y entramos en el que acabamos de crear, veremos el **ID** y el **Secret** del cliente. Los utilizaremos más tarde para la creación del agente.
 
 ![Pasos finales](./img/glpi3.PNG)
 
