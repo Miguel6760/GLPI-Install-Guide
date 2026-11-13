@@ -217,7 +217,7 @@ openssl pkcs12 -in certificado.p12 -clcerts -nokeys -out cert.pem
 Si por el contrario lo quieres autofirmado, el comando para generarlas es el siguiente:
 
 ```bash
-openssl req -x509 -newkey rsa:2048 -keyout etc/key.pem -out etc/cert.pem -days 3650 -sha256 -nodes -subj "/CN=127.0.0.1"
+openssl req -x509 -newkey rsa:2048 -keyout key.pem -out cert.pem -days 3650 -sha256 -nodes -subj "/CN=127.0.0.1"
 ```
 
 Después, creamos un archivo de configuración para el proxy llamado nginx.conf con este contenido:
