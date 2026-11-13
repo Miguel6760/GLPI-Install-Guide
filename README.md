@@ -365,6 +365,7 @@ task =                             # Tareas a realizar
 no-category = accesslog,antivirus,battery,database,environment,firewall,input,licenseinfo,local_group,local_user,monitor,printer,process,provider,psu,registry,rudder,sound,usb,user,slot,controller
 
 # Autenticación por clave
+# Aqui pegamos las claves client-id y client-secret vistas anteriormente
 oauth-client-id = 
 oauth-client-secret = 
 ```
