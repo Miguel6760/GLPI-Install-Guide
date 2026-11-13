@@ -240,11 +240,6 @@ server {
 }
 
 ```
-Deberia quedar estructurado asi:
-
-```bash
-
-``
 
 Una vez con el par de claves y el archivo de configuración, el contenido de docker-compose.yml cambiaría a esto:
 
