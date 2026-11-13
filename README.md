@@ -357,7 +357,7 @@ El archivo de configuración se encuentra en la siguiente ruta:
 Un contenido simple sería este:
 
 ```nano
-server = http://IPSERVIDOR:8080
+server = http://IPSERVIDOR:8080    # o https si has configurado el servidor con https
 tag = cliente_A                    # Etiqueta para diferenciar entre distintos clientes ( OPCIONAL )
 task =                             # Tareas a realizar
 
