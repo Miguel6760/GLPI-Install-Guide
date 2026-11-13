@@ -367,7 +367,9 @@ no-category = accesslog,antivirus,battery,database,environment,firewall,input,li
 # Autenticación por clave
 # Aqui pegamos las claves client-id y client-secret vistas anteriormente
 oauth-client-id = 
-oauth-client-secret = 
+oauth-client-secret =
+
+no-ssl-check = 1   # SOLO SI USAS HTTPS CON CERTIFICADO AUTOFIRMADOS
 ```
 
 Las tareas puden ser de distintos tipos:
