@@ -191,6 +191,13 @@ contraseña: glpi
 
 GLPI por defecto no soporta HTTPS, pero podemos implementarlo utilizando nginx como proxy web ( ESTO ES OPCIONAL, PUEDES SALTARTELO ):
 
+Primero debemos permitir el puerto 443/tcp en nuestro firewall:
+
+```bash
+sudo ufw allow 443/tcp comment "HTTPS GLPI"
+sudo ufw reload
+```
+
 Creamos una carpeta para los certificados:
 
 ```bash
